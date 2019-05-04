@@ -245,6 +245,19 @@ Mümkünse `IntegerField` yerine `PositiveIntegerField` kullanın. `unique`,
 
 Fiyat gibi bir bilgi tutmak için `FloatField` yerine `DecimalField` kullanın.
 
+`@property` ya da `@cached_property` dekoratörü kullandığımız method’lar asla
+veritabanına istek **yapmamalı**, yani;
+
+```python
+# Yanlış örnek
+class Author(models.Model):
+    :
+    :
+    @property
+    def number_of_books(self):
+        return self.books.count()  # Book modeline bağlı ve veritabanı sorgusu yapıyor
+```
+
 ---
 
 ## Model Query
@@ -323,6 +336,23 @@ urlpatterns = [
 ]
 ```
 
+Template içinde kontrol yaparken, şunun yerine:
+
+```django
+{% if obj.customer_type == 'Member' %}
+...
+{% endif %}
+```
+
+Model içinde bir method’a bağlayıp:
+
+```django
+{% if obj.is_customer_type_member %}
+...
+{% endif %}
+```
+
+gibi işlem yapılmalı.
 
 ---
 
@@ -374,3 +404,4 @@ urlpatterns = [
 
 - https://docs.djangoproject.com/en/2.2/internals/contributing/writing-code/coding-style/
 - https://steelkiwi.com/blog/best-practices-working-django-models-python/
+- https://github.com/octoenergy/conventions
