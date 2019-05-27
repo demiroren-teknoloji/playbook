@@ -400,6 +400,56 @@ gibi işlem yapılmalı.
 
 ---
 
+## Mixin Kullanımı
+
+Python’nun MRO (*Method Resolution Order*) durumunu gözönüne alarak sıralamayı:
+
+```python
+class FooView(MyMixin, YourMixin, AccessMixin, DetailView):
+    pass
+```
+
+mantığında yapmak gerekiyor...
+
+```python
+class A:
+    def who_am_i(self):
+        return 'A'
+
+
+class B:
+    def who_am_i(self):
+        return 'B'
+
+
+class BandA(B, A):
+    pass
+
+
+class AandB(A, B):
+    pass
+
+
+print(BandA().who_am_i()) # B
+print(AandB().who_am_i()) # A
+
+print(AandB.mro())
+# [
+#     <class '__main__.AandB'>,
+#     <class '__main__.A'>,
+#     <class '__main__.B'>,
+#     <class 'object'>
+# ]
+```
+
+`AandB` super’i çağırdığında sırayla;
+
+1. `A` çağırılır,
+1. `A`’nın super’i `B`’yi çağırır
+1. `B`’nin super’i de `object`’i çağırır...
+
+---
+
 ## Linkler
 
 - https://docs.djangoproject.com/en/2.2/internals/contributing/writing-code/coding-style/
