@@ -211,7 +211,7 @@ u.products.all()
 ilişkisi var. Bu durumda `Article` modelinde `user = models.ForeignKey(to='User')`
 yerine `author = models.ForeignKey(to='User')` olmalı, yazının yazarı :)
 
-Kullanmı tercihi olarak;
+Kullanım tercihi olarak;
 
 
 `unique=True` ile `ForeignKey` kullanmak yerine `OneToOneField` kullanın
