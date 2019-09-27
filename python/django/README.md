@@ -126,7 +126,7 @@ class Posts(models.Model):
 
 Model tanımı içinde sıralama aşağıdaki gibi olmalıdır:
 
-1. Eğer `choises` varsa class attribute olarak yazılmalı
+1. Eğer `choices` varsa class attribute olarak yazılmalı
 1. Tüm alan tanımlamaları
 1. Custom Manager tanımlamaları
 1. `class Meta`
